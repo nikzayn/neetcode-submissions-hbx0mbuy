@@ -1,11 +1,13 @@
-func canJump(nums []int) bool {
-    goal := len(nums) - 1
+func jump(nums []int) int {
+    jumps, farthest, currEnd := 0, 0, 0
 
-	for i := len(nums) - 2; i >= 0; i-- {
-		if i + nums[i] >= goal {
-			goal = i
+	for i := 0; i < len(nums) - 1; i++ {
+		farthest = max(farthest, i+nums[i])
+		if i == currEnd {
+			jumps++
+			currEnd = farthest
 		}
 	}
 
-	return goal == 0
+	return jumps
 }
